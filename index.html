@@ -4,18 +4,39 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <link href="style.css" rel="stylesheet" type="text/css" />
+  <div class="topnav">
+    <img src="https://i.pinimg.com/originals/32/eb/23/32eb230b326ee3c76e64f619a06f6ebb.png" alt="">
+    <input type="text" placeholder="Search..">
+  </div>
   </head>
   <body>
-    <script src="script.js"></script>
-    <p1 id="name"></p1>
-    <p id="hp"></p>
-    <p id="atk"></p>
-    <p id="def"></p>
-    <p id="sp-atk"></p>
-    <p id="sp-def"></p>
-    <p id="spd"></p>
-    <img id="sprite" src="" alt="">
-    <br></br>
+    <div class="data">
+      <script src="script.js"></script>
+      <!--p1 id="name"></p1>
+      <p id="hp"></p>
+      <p id="atk"></p>
+      <p id="def"></p>
+      <p id="sp-atk"></p>
+      <p id="sp-def"></p>
+      <p id="spd"></p>
+      <img id="sprite" src="" alt="">
+      <br></br-->
+      <div class="titles">
+        <p id="name"></p>
+        <p>Stats:</p>
+      </div>
+      <span class="data-inline">
+        <a id="hp"></a>
+        <a id="atk"></a>
+        <a id="def"></a>
+        <a id="sp-atk"></a>
+        <a id="sp-def"></a>
+        <a id="spd"></a>
+        <br></br>
+        <img id="sprite" src="" alt="">
+        <br></br>
+      </span>
+    </div>
     <button onclick="poke_random()">Random Pokemon</button>
   </body>
 </html>
