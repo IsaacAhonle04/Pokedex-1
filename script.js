@@ -79,4 +79,14 @@ function poke_random() {
 
   poke_data_request.send()
 }
+
 poke_random()
+
+/* Random stuff that doesn't work, apparently.
+function poke_random_pass(){
+  if KeyboardEvent.code === 13 {
+    document.getElementById("submit").click();
+  }
+}
+document.getElementById("searchBar").addEventListener('keyup', poke_random_pass(e)
+*/
