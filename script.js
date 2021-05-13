@@ -1,14 +1,8 @@
 // Create a request variable and assign a new XMLHttpRequest object to it.
-function poke_random() {
-  var num = Math.floor(Math.random()*898)
-
-  var poke_link = `https://pokeapi.co/api/v2/pokemon/${num}`
-  //console.log(`Link: ${poke_link}`)
-
-
+function poke_all(link){  
   var sprite = new XMLHttpRequest()
 
-  sprite.open('GET', poke_link, true)
+  sprite.open('GET', link, true)
 
   sprite.onload = function () {
 
@@ -23,7 +17,7 @@ function poke_random() {
 
   var poke_data_request = new XMLHttpRequest()
 
-  poke_data_request.open('GET', poke_link, true)
+  poke_data_request.open('GET', link, true)
 
   poke_data_request.onload = function () {
 
@@ -63,30 +57,64 @@ function poke_random() {
     document.getElementById("spd").innerHTML = `Speed: ${poke_spd}`;
   }
 
- var species_page = new XMLHttpRequest()
+  var species_page = new XMLHttpRequest()
 
-  species_page.open('GET', poke_link, true)
+  species_page.open('GET', link, true)
 
   species_page.onload = function () {
 
     var data = JSON.parse(this.response)
     poke_species = data.species.url
-    console.log(`Species Link: ${poke_species}`)
+
+    var evo_page =  new XMLHttpRequest()
+    evo_page.open('GET', poke_species, true)
+    evo_page.onload = function (){
+      var data = JSON.parse(this.response)
+      poke_evo = data.evolution_chain.url
+      //console.log(`Evolutions: ${poke_evo}`)
+    }
+    evo_page.send()
   }
 
   species_page.send()
-
+  
 
   poke_data_request.send()
 }
 
+
+function poke_random() {
+  var num = Math.floor(Math.random()*898)
+
+  var poke_link = `https://pokeapi.co/api/v2/pokemon/${num}`
+  //console.log(`Link: ${poke_link}`)
+
+  poke_all(poke_link)
+}
+
 poke_random()
 
-/* Random stuff that doesn't work, apparently.
-function poke_random_pass(){
-  if KeyboardEvent.code === 13 {
-    document.getElementById("submit").click();
-  }
+
+function search(term_parameter){
+  var poke_link = `https://pokeapi.co/api/v2/pokemon/${term_parameter}`
+  poke_all(poke_link)
 }
-document.getElementById("searchBar").addEventListener('keyup', poke_random_pass(e)
-*/
+
+
+var input = document.getElementById("searchBar");
+
+// Execute a function when the user releases a key on the keyboard
+input.addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode !== 13) {
+
+    event.preventDefault();
+
+  }
+  else {
+    var search_term = document.getElementById("searchBar").value;
+    search(search_term)
+  }
+});
+
+
