@@ -26,7 +26,7 @@
 
 .grid {
   display: grid;
-  padding: 15px;
+  justify-content: center;
   border: 1px solid black;
   border-radius: 15px;
   /*grid-template-columns: 100px 140px 140px 200px 200px 200px*/
@@ -42,4 +42,17 @@
   font-size: 20px;
 }
 
+.data{
+  padding-left: 500px;
+  padding-right: 500px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 
+.btn-out{
+  padding-left: 45%;
+}
+
+.btn-in{
+  padding: 10px;
+}

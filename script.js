@@ -116,5 +116,3 @@ input.addEventListener("keyup", function(event) {
     search(search_term)
   }
 });
-
-
