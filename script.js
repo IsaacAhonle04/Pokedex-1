@@ -1,4 +1,6 @@
 // Create a request variable and assign a new XMLHttpRequest object to it.
+var num = ""
+
 function poke_all(link){  
 
   var poke_data_request = new XMLHttpRequest()
@@ -41,8 +43,9 @@ function poke_all(link){
     document.getElementById("spd").innerHTML = `Speed: ${poke_spd}`;
 
     poke_species = data.species.url
+    num = data.id
 
-    var evo_page =  new XMLHttpRequest()
+    /*var evo_page =  new XMLHttpRequest()
     evo_page.open('GET', poke_species, true)
     evo_page.onload = function (){
       var data = JSON.parse(this.response)
@@ -52,34 +55,55 @@ function poke_all(link){
       evolutions_request.open('GET', poke_evo,true)
 
     }
-    evo_page.send()    
+    evo_page.send()*/    
   }
-
-  /*var species_page = new XMLHttpRequest()
-
+  //Get the final stage to function
+  var species_page = new XMLHttpRequest()
   species_page.open('GET', link, true)
-
   species_page.onload = function () {
-
     var data = JSON.parse(this.response)
     poke_species = data.species.url
-
+    //console.log('poke_species',poke_species)
     var evo_page =  new XMLHttpRequest()
     evo_page.open('GET', poke_species, true)
     evo_page.onload = function (){
       var data = JSON.parse(this.response)
       poke_evo = data.evolution_chain.url
-      //console.log(`Evolutions: ${poke_evo}`)
+      //console.log('poke_evo',poke_evo)
+      var evolution_data_request = new XMLHttpRequest()
+      evolution_data_request.open('GET', poke_evo, )
+      evolution_data_request.onload = function() {
+        var data = JSON.parse(this.response)  
+        evo_chain_names = []
+        current_poke =  data.chain
+
+          while (current_poke.evolves_to.length > 0){
+            evo_chain_names.push(current_poke.species.name)
+            current_poke = current_poke.evolves_to[0]
+          } 
+          
+        evo_chain_names.push(current_poke.species.name);
+
+       /* else {
+          evo_chain_names.push(current_poke.species.name)
+        }*/
+        
+        //evo_chain_names.push(current_poke[0].species.name)
+        console.log(evo_chain_names)
+      }
+      evolution_data_request.send()
+      
     }
     evo_page.send()
-  }*/
+  } 
+  species_page.send()
+  
 
   
 
   poke_data_request.send()
 }
 
-var num = ""
 
 function poke_random() {
   num = Math.floor(Math.random()*898)
