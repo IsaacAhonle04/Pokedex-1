@@ -1,6 +1,10 @@
 // Create a request variable and assign a new XMLHttpRequest object to it.
 var num = ""
 
+var evo_check_num = 0
+
+var evo_check = ""
+
 function poke_all(link){  
 
   var poke_data_request = new XMLHttpRequest()
@@ -33,10 +37,10 @@ function poke_all(link){
     poke_sp_atk = data.stats[3].base_stat
     //console.log(`Special Attack: ${poke_sp_atk}`)
     document.getElementById("sp-atk").innerHTML = `Special Attack: ${poke_sp_atk}`;
-
+    var x = "def"
     poke_sp_def = data.stats[4].base_stat
     //console.log(`Special Defense: ${poke_def}`)
-    document.getElementById("sp-def").innerHTML = `Special Defense: ${poke_sp_def}`;
+    document.getElementById(`sp-${x}`).innerHTML = `Special Defense: ${poke_sp_def}`;
 
     poke_spd = data.stats[5].base_stat
     //console.log(`Speed: ${poke_spd}`)
@@ -84,12 +88,15 @@ function poke_all(link){
           
         evo_chain_names.push(current_poke.species.name);
 
-       /* else {
-          evo_chain_names.push(current_poke.species.name)
-        }*/
-        
-        //evo_chain_names.push(current_poke[0].species.name)
-        console.log(evo_chain_names)
+        //console.log(evo_chain_names)
+        //console.log(evo_chain_names[0])
+        var evo_check = evo_chain_names[evo_check_num]
+        for (stage in evo_chain_names){
+            //console.log(evo_check_num)
+            document.getElementById(`evolution-${evo_check_num+1}`).innerHTML = evo_chain_names[evo_check_num];
+            evo_check_num = evo_check_num+1
+        }  
+        evo_check_num = 0
       }
       evolution_data_request.send()
       
@@ -99,7 +106,7 @@ function poke_all(link){
   species_page.send()
   
 
-  
+  evo_chain_names =[]
 
   poke_data_request.send()
 }
@@ -131,6 +138,9 @@ function poke_prev(){
 
 function search(term_parameter){
   var poke_link = `https://pokeapi.co/api/v2/pokemon/${term_parameter}`
+  document.getElementById("evolution-1").innerHTML = "";
+  document.getElementById("evolution-2").innerHTML = "";
+  document.getElementById("evolution-3").innerHTML = "";
   poke_all(poke_link)
 }
 
@@ -150,3 +160,5 @@ input.addEventListener("keyup", function(event) {
     search(search_term)
   }
 });
+
+//Next step is to print all names within the list "evo_chain_names". Then, create a function that works similar to the "search" function, in that it takes a string, attatches it to the pokemon link root, and runs "poke_all" on that new link. Finally, this function should execute when the evolution chain names are clicked, taking you to the page of the respective pokemon.
