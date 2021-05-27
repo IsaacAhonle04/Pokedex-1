@@ -90,3 +90,32 @@
 .hi{
   padding-left: 50%;
 }
+
+.evolutions{
+  display: flex;
+  justify-content: center;
+  padding: 200px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+#evolution-1{
+  padding: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  text-transform: capitalize;
+}
+
+#evolution-2{
+  padding: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  text-transform: capitalize;
+}
+
+#evolution-3{
+  padding: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  text-transform: capitalize;  
+}

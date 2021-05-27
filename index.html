@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width">
     <link href="style.css" rel="stylesheet" type="text/css" />
   <div class="topnav">
-    <img src="https://i.pinimg.com/originals/32/eb/23/32eb230b326ee3c76e64f619a06f6ebb.png" alt="">
+    <img src="https://i.pinimg.com/originals/32/eb/23/32eb230b326ee3c76e64f619a06f6ebb.png" alt="" onclick="poke_random()">
     <input id="searchBar" type="text" placeholder="Search..">
   </div>
   </head>
   <body>
+
     <div class="data">
-      <script src="script.js"></script>
       <div class="grid">
         <div class="titles">
           <p id="name"></p>
-          <p id="dexnum"></p>
         </div>        
         <img class="pokesprite" id="sprite" src="" alt="" onclick="">   
         <div class="titles">
+        <p id="dexnum"></p>
         <p>Stats:</p>
         </div>
         <a id="hp"></a>
@@ -45,9 +45,10 @@
     </div> 
     <br>
     <div class="evolutions">
-      <a id="evolution-1"></a>
-      <a id="evolution-2"></a>
-      <a id="evolution-3"></a>      
+      <a id="evolution-1" onclick="generation(0)"></a>
+      <a id="evolution-2" onclick="generation(1)"></a>
+      <a id="evolution-3" onclick="generation(2)"></a>      
     </div>
+    <script src="script.js"></script>
   </body>
 </html>

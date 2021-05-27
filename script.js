@@ -48,6 +48,7 @@ function poke_all(link){
 
     poke_species = data.species.url
     num = data.id
+    document.getElementById("dexnum").innerHTML = `Dex Number: ${num}`
 
     /*var evo_page =  new XMLHttpRequest()
     evo_page.open('GET', poke_species, true)
@@ -75,7 +76,7 @@ function poke_all(link){
       poke_evo = data.evolution_chain.url
       //console.log('poke_evo',poke_evo)
       var evolution_data_request = new XMLHttpRequest()
-      evolution_data_request.open('GET', poke_evo, )
+      evolution_data_request.open('GET', poke_evo, true)
       evolution_data_request.onload = function() {
         var data = JSON.parse(this.response)  
         evo_chain_names = []
@@ -111,36 +112,43 @@ function poke_all(link){
   poke_data_request.send()
 }
 
+function evo_reset() {
+  document.getElementById("evolution-1").innerHTML = "";
+  document.getElementById("evolution-2").innerHTML = "";
+  document.getElementById("evolution-3").innerHTML = "";
+}
 
 function poke_random() {
+
+
   num = Math.floor(Math.random()*898)
 
   var poke_link = `https://pokeapi.co/api/v2/pokemon/${num}`
-  //console.log(`Link: ${poke_link}`)
-
+  evo_reset()
   poke_all(poke_link)
 }
 
 poke_random()
 
+// The following functions are attatched to HTML elements
 function poke_next(){
   num = num+1
   var poke_link_next = `https://pokeapi.co/api/v2/pokemon/${num}`
+  evo_reset()
   poke_all(poke_link_next)
 }
 
 function poke_prev(){
   num = num-1
   var poke_link_prev = `https://pokeapi.co/api/v2/pokemon/${num}`
+  evo_reset()
   poke_all(poke_link_prev)
 }
 
 
 function search(term_parameter){
   var poke_link = `https://pokeapi.co/api/v2/pokemon/${term_parameter}`
-  document.getElementById("evolution-1").innerHTML = "";
-  document.getElementById("evolution-2").innerHTML = "";
-  document.getElementById("evolution-3").innerHTML = "";
+  evo_reset()
   poke_all(poke_link)
 }
 
@@ -160,5 +168,13 @@ input.addEventListener("keyup", function(event) {
     search(search_term)
   }
 });
+
+function generation(stage_num) {
+  var poke_link_evo = `https://pokeapi.co/api/v2/pokemon/${evo_chain_names[stage_num]}`
+  poke_all(poke_link_evo)
+}
+
+
+
 
 //Next step is to print all names within the list "evo_chain_names". Then, create a function that works similar to the "search" function, in that it takes a string, attatches it to the pokemon link root, and runs "poke_all" on that new link. Finally, this function should execute when the evolution chain names are clicked, taking you to the page of the respective pokemon.
